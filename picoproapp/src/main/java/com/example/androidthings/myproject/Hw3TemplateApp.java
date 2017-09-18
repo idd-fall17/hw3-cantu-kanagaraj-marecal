@@ -48,30 +48,34 @@ public class Hw3TemplateApp extends SimplePicoPro {
     }
 
     public void loop() {
-        // read all analog channels and print to UART
-        a0 = analogRead(A0);
-        a1 = analogRead(A1);
+        //read all analog channels and print to UART
+       a0 = analogRead(A0);
+       a1 = analogRead(A1);
         a2 = analogRead(A2);
         a3 = analogRead(A3);
-        println(UART6,"A0: "+a0+"   A1: "+a1+"   A2: "+a2+"   A3: "+a3); // this goes to the Serial port
-        println("A0: "+a0+"   A1: "+a1+"   A2: "+a2+"   A3: "+a3); // this goes to the Android Monitor in Android Studio
-
+        //println(UART6,""+a0);//+"   A1: "+a1+"   A2: "+a2+"   A3: "+a3); // this goes to the Serial port
+        //println("A0: "+a0+"   A1: "+a1+"   A2: "+a2+"   A3: "+a3); // this goes to the Android Monitor in Android Studio
+        printCharacterToScreen('b');
 
         // read I2C accelerometer and print to UART
         try {
             xyz = accelerometer.readSample();
-            println(UART6,"X: "+xyz[0]+"   Y: "+xyz[1]+"   Z: "+xyz[2]);
-            println("X: "+xyz[0]+"   Y: "+xyz[1]+"   Z: "+xyz[2]);
+            printCharacterToScreen('a');
+            //println(UART6,"X: "+xyz[1]);//+"   Y: "+xyz[1]+"   Z: "+xyz[2]);
+            //println("X: "+xyz[0]);//+"   Y: "+xyz[1]+"   Z: "+xyz[2]);
 
             //use this line instead for unlabeled numbers separated by tabs that work with Arduino's SerialPlotter:
             //println(UART6,xyz[0]+"\t"+xyz[1]+"\t"+xyz[2]); // this goes to the Serial port
 
         } catch (IOException e) {
+            printCharacterToScreen('e');
+
             Log.e("HW3Template","loop",e);
         }
 
-
+        println(UART6,xyz[1]+" "+a0);
         delay(100);
 
     }
 }
+
